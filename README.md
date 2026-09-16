@@ -1,8 +1,14 @@
 # flukit_ui
 
-[![pub package](https://img.shields.io/badge/pub-v1.0.0-blue.svg)](https://pub.dev/packages/flukit_ui)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Flutter Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)]()
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Ebadzmn/Flukit_ui/main/assets/banner.png" alt="FluKit UI Banner" width="100%" />
+</p>
+
+<p align="center">
+  <a href="https://pub.dev/packages/flukit_ui"><img src="https://img.shields.io/badge/pub-v1.0.0-blue.svg" alt="pub package" /></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
+  <img src="https://img.shields.io/badge/tests-passing-brightgreen.svg" alt="Flutter Tests" />
+</p>
 
 > **Flutter, but with less boilerplate.**  
 > A lightweight, productivity-focused Flutter package providing short, readable, and consistent aliases for commonly used widgets, properties, and UI utilities.

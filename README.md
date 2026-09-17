@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Ebadzmn/Flukit_ui/main/assets/flukit_ui_banner.png" alt="flukit_ui Banner" width="100%" />
+  <img src="https://raw.githubusercontent.com/Ebadzmn/Flukit_ui/main/assets/flukit_ui_img.png" alt="FluKit UI Banner" width="100%" />
   <br/><br/>
   <h1>⚡ flukit_ui</h1>
   <p><strong>A fluent, lightweight productivity toolkit for Flutter developers.</strong></p>

@@ -1,6 +1,6 @@
 name: flukit_ui
 description: A lightweight, productivity-focused Flutter UI package providing short, readable, and consistent aliases for commonly used widgets, properties, and styling utilities.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/Ebadzmn/Flukit_ui
 repository: https://github.com/Ebadzmn/Flukit_ui
 issue_tracker: https://github.com/Ebadzmn/Flukit_ui/issues

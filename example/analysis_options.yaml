@@ -4,3 +4,5 @@ analyzer:
   errors:
     camel_case_types: ignore
     deprecated_member_use: ignore
+  exclude:
+    - build/**

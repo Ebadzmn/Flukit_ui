@@ -11,7 +11,7 @@ class FluKitExampleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'FluKit UI Demo',
+      title: 'FluKit UI Showcase',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6366F1)),
@@ -34,213 +34,243 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return scaf(
-      bg: hex('#F8FAFC'),
+    return Scaffold(
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
-        backgroundColor: white,
+        backgroundColor: Colors.white,
         elevation: 0,
-        title: row(
-          ch: [
-            cont(
-              pad: 8,
-              rad: 8,
-              cl: hex('#4F46E5'),
-              ch: const ico(Icons.flash_on, sz: 20, cl: white),
+        title: Row(
+          children: [
+            const Box(
+              padding: 8,
+              radius: 8,
+              color: Color(0xFF4F46E5),
+              child: Icon(Icons.flash_on, size: 20, color: Colors.white),
             ),
-            hgap(12),
-            const txt('flutterx_ui Showcase', fs: 18, fw: bold, cl: black),
+            12.width,
+            const Text('FluKit UI Showcase')
+                .size(18)
+                .bold()
+                .color(Colors.black),
           ],
         ),
       ),
       body: SingleChildScrollView(
-        child: pad(
-          16,
-          ch: col(
-            cross: CrossAxisAlignment.stretch,
-            ch: [
-              // Hero Banner Card
-              cont(
-                pad: 20,
-                rad: 16,
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF4F46E5), Color(0xFF7C3AED)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                shadow: [
-                  dropShadow(color: hex('#4F46E5', alpha: 0.3), blur: 16, offset: const Offset(0, 8))
+        padding: 16.padAll,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Hero Banner Card
+            Box(
+              padding: 20,
+              radius: 16,
+              gradient: const LinearGradient(
+                colors: [Color(0xFF4F46E5), Color(0xFF7C3AED)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              shadow: [
+                dropShadow(
+                  color: const Color(0xFF4F46E5).op(0.3),
+                  blur: 16,
+                  offset: const Offset(0, 8),
+                )
+              ],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Clean UI with Fluent Extensions')
+                      .size(22)
+                      .bold()
+                      .color(Colors.white),
+                  8.height,
+                  const Text(
+                    'Zero learning curve. Write pure Flutter widgets with powerful method chaining.',
+                  )
+                      .size(14)
+                      .color(Colors.white.op(0.85))
+                      .lineHeight(1.4),
+                  16.height,
+                  Row(
+                    children: [
+                      Box(
+                        padding: 8,
+                        radius: 20,
+                        color: Colors.white.op(0.2),
+                        child: const Text('Text().bold()')
+                            .size(12)
+                            .bold()
+                            .color(Colors.white),
+                      ),
+                      8.width,
+                      Box(
+                        padding: 8,
+                        radius: 20,
+                        color: Colors.white.op(0.2),
+                        child: const Text('16.height')
+                            .size(12)
+                            .bold()
+                            .color(Colors.white),
+                      ),
+                      8.width,
+                      Box(
+                        padding: 8,
+                        radius: 20,
+                        color: Colors.white.op(0.2),
+                        child: const Text('.onTap()')
+                            .size(12)
+                            .bold()
+                            .color(Colors.white),
+                      ),
+                    ],
+                  ),
                 ],
-                ch: col(
-                  cross: CrossAxisAlignment.start,
-                  ch: [
-                    const txt('Clean UI with Zero Boilerplate', fs: 22, fw: bold, cl: white),
-                    vgap(8),
-                    txt(
-                      'Build high-performance Flutter interfaces up to 40% faster using intuitive aliases and expressive extension chaining.',
-                      fs: 14,
-                      cl: white.withOpacity(0.85),
-                      lh: 1.4,
-                    ),
-                    vgap(16),
-                    row(
-                      ch: [
-                        cont(
-                          pad: 8,
-                          rad: 20,
-                          cl: white.withOpacity(0.2),
-                          ch: const txt('cont', fs: 12, fw: bold, cl: white),
-                        ),
-                        hgap(8),
-                        cont(
-                          pad: 8,
-                          rad: 20,
-                          cl: white.withOpacity(0.2),
-                          ch: const txt('txt', fs: 12, fw: bold, cl: white),
-                        ),
-                        hgap(8),
-                        cont(
-                          pad: 8,
-                          rad: 20,
-                          cl: white.withOpacity(0.2),
-                          ch: const txt('col / row', fs: 12, fw: bold, cl: white),
-                        ),
-                        hgap(8),
-                        cont(
-                          pad: 8,
-                          rad: 20,
-                          cl: white.withOpacity(0.2),
-                          ch: const txt('gap()', fs: 12, fw: bold, cl: white),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
               ),
+            ),
 
-              vgap(24),
+            24.height,
 
-              // Section: Before vs After Comparison Card
-              const txt('Before vs After', fs: 18, fw: bold, cl: black),
-              vgap(12),
-              _buildComparisonCard(),
+            // Section: Comparison Card
+            const Text('Before vs After').size(18).bold().color(Colors.black),
+            12.height,
+            _buildComparisonCard(),
 
-              vgap(24),
+            24.height,
 
-              // Section: Interactive Counter Demonstration
-              const txt('Interactive Widget Aliases', fs: 18, fw: bold, cl: black),
-              vgap(12),
-              cont(
-                pad: 20,
-                rad: 14,
-                cl: white,
-                bor: 1,
-                bc: hex('#E2E8F0'),
-                ch: col(
-                  ch: [
-                    const txt('Counter Demo with Shorthand', fs: 16, fw: semiBold),
-                    vgap(12),
-                    txt('$_counter', fs: 36, fw: bold, cl: hex('#4F46E5')),
-                    vgap(16),
-                    row(
-                      main: MainAxisAlignment.center,
-                      ch: [
-                        ElevatedButton.icon(
-                          onPressed: () => setState(() => _counter--),
-                          icon: const ico(Icons.remove, sz: 18),
-                          label: const txt('Decrease', fw: medium),
-                        ),
-                        hgap(16),
-                        ElevatedButton.icon(
-                          onPressed: () => setState(() => _counter++),
-                          icon: const ico(Icons.add, sz: 18),
-                          label: const txt('Increase', fw: medium),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+            // Section: Interactive Counter
+            const Text('Interactive Counter Demo')
+                .size(18)
+                .bold()
+                .color(Colors.black),
+            12.height,
+            Box(
+              padding: 20,
+              radius: 14,
+              color: Colors.white,
+              borderColor: const Color(0xFFE2E8F0),
+              child: Column(
+                children: [
+                  const Text('Fluent Extension Interactivity')
+                      .size(16)
+                      .semiBold(),
+                  12.height,
+                  Text('$_counter')
+                      .size(36)
+                      .bold()
+                      .color(const Color(0xFF4F46E5)),
+                  16.height,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: () => setState(() => _counter--),
+                        icon: const Icon(Icons.remove, size: 18),
+                        label: const Text('Decrease').medium(),
+                      ),
+                      16.width,
+                      ElevatedButton.icon(
+                        onPressed: () => setState(() => _counter++),
+                        icon: const Icon(Icons.add, size: 18),
+                        label: const Text('Increase').medium(),
+                      ),
+                    ],
+                  ),
+                ],
               ),
+            ),
 
-              vgap(24),
+            24.height,
 
-              // Section: Extensions Showcase
-              const txt('Chaining & Extensions', fs: 18, fw: bold, cl: black),
-              vgap(12),
-              cont(
-                pad: 16,
-                rad: 12,
-                cl: white,
-                bor: 1,
-                bc: hex('#E2E8F0'),
-                ch: col(
-                  cross: CrossAxisAlignment.start,
-                  ch: [
-                    const txt('Fluent chained text example')
-                        .fs(16)
-                        .bold()
-                        .cl(const Color(0xFF0F172A)),
-                    vgap(8),
-                    const txt('Secondary caption with medium weight and italic')
-                        .fs(13)
-                        .italic()
-                        .cl(grey600),
-                    vgap(12),
-                    row(
-                      ch: [
-                        const txt('Tag 1').pad(6).px(10).center(),
-                        12.hgap,
-                        const txt('Tag 2 with num extension').pad(6).px(10).center(),
-                      ],
-                    ),
-                  ],
-                ),
+            // Section: Extensions Showcase
+            const Text('Text & Widget Extensions')
+                .size(18)
+                .bold()
+                .color(Colors.black),
+            12.height,
+            Box(
+              padding: 16,
+              radius: 12,
+              color: Colors.white,
+              borderColor: const Color(0xFFE2E8F0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Fluent chained text example')
+                      .size(16)
+                      .bold()
+                      .color(const Color(0xFF0F172A)),
+                  8.height,
+                  const Text('Secondary caption with medium weight and italic')
+                      .size(13)
+                      .italic()
+                      .color(Colors.grey),
+                  12.height,
+                  Row(
+                    children: [
+                      const Text('Tag 1')
+                          .paddingSymmetric(horizontal: 10, vertical: 6)
+                          .center(),
+                      12.width,
+                      const Text('Tap me!')
+                          .paddingSymmetric(horizontal: 12, vertical: 6)
+                          .rounded(8)
+                          .onTap(() {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Tapped Tag!')),
+                            );
+                          }),
+                    ],
+                  ),
+                ],
               ),
+            ),
 
-              vgap(32),
-            ],
-          ),
+            32.height,
+          ],
         ),
       ),
     );
   }
 
   Widget _buildComparisonCard() {
-    return cont(
-      pad: 16,
-      rad: 12,
-      cl: white,
-      bor: 1,
-      bc: hex('#E2E8F0'),
-      ch: col(
-        cross: CrossAxisAlignment.start,
-        ch: [
-          const txt('Standard Flutter (Boilerplate):', fs: 13, fw: bold, cl: grey700),
-          vgap(6),
-          cont(
-            pad: 10,
-            rad: 8,
-            cl: hex('#F1F5F9'),
-            ch: txt(
-              'Container(\n  padding: const EdgeInsets.all(16),\n  margin: const EdgeInsets.all(8),\n  decoration: BoxDecoration(\n    color: Colors.white,\n    borderRadius: BorderRadius.circular(12),\n  ),\n)',
-              fs: 12,
-              font: 'monospace',
-              cl: hex('#334155'),
-            ),
+    return Box(
+      padding: 16,
+      radius: 12,
+      color: Colors.white,
+      borderColor: const Color(0xFFE2E8F0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Standard Flutter:')
+              .size(13)
+              .bold()
+              .color(const Color(0xFF334155)),
+          6.height,
+          Box(
+            padding: 10,
+            radius: 8,
+            color: const Color(0xFFF1F5F9),
+            child: const Text(
+              'Text(\n  "Hello",\n  style: TextStyle(\n    fontSize: 18,\n    fontWeight: FontWeight.bold,\n    color: Colors.blue,\n  ),\n)',
+            ).size(12).fontFamily('monospace').color(const Color(0xFF334155)),
           ),
-          vgap(14),
-          txt('flutterx_ui Syntax:', fs: 13, fw: bold, cl: hex('#4F46E5')),
-          vgap(6),
-          cont(
-            pad: 10,
-            rad: 8,
-            cl: hex('#EEF2FF'),
-            ch: txt(
-              'cont(\n  pad: 16,\n  mar: 8,\n  rad: 12,\n  cl: white,\n)',
-              fs: 12,
-              font: 'monospace',
-              cl: hex('#4338CA'),
-              fw: semiBold,
-            ),
+          14.height,
+          const Text('With FluKit UI:')
+              .size(13)
+              .bold()
+              .color(const Color(0xFF4F46E5)),
+          6.height,
+          Box(
+            padding: 10,
+            radius: 8,
+            color: const Color(0xFFEEF2FF),
+            child: const Text(
+              'Text("Hello")\n  .size(18)\n  .bold()\n  .color(Colors.blue)',
+            )
+                .size(12)
+                .fontFamily('monospace')
+                .color(const Color(0xFF4338CA))
+                .semiBold(),
           ),
         ],
       ),

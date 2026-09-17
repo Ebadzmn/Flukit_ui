@@ -1,45 +1,38 @@
 import 'package:flutter/material.dart';
 
-/// Helper to create a clean [BoxDecoration] with concise property names.
-BoxDecoration bdec({
-  Color? cl,
-  dynamic rad,
-  double? bor,
-  Color? bc,
-  BorderStyle bs = BorderStyle.solid,
+/// Helper to create a clean [BoxDecoration] with standard property names.
+BoxDecoration boxDecoration({
+  Color? color,
+  double? radius,
+  BorderRadiusGeometry? borderRadius,
+  Border? border,
+  Color? borderColor,
+  double borderWidth = 1.0,
   List<BoxShadow>? shadow,
   Gradient? gradient,
   BoxShape shape = BoxShape.rectangle,
 }) {
-  BorderRadius? borderRadius;
-  if (shape != BoxShape.circle && rad != null) {
-    if (rad is BorderRadius) {
-      borderRadius = rad;
-    } else if (rad is num) {
-      borderRadius = BorderRadius.circular(rad.toDouble());
-    }
+  BorderRadiusGeometry? resolvedRadius = borderRadius;
+  if (shape != BoxShape.circle && resolvedRadius == null && radius != null) {
+    resolvedRadius = BorderRadius.circular(radius);
   }
 
-  BoxBorder? border;
-  if (bor != null || bc != null) {
-    border = Border.all(
-      color: bc ?? const Color(0xFF000000),
-      width: bor ?? 1.0,
-      style: bs,
-    );
+  Border? resolvedBorder = border;
+  if (resolvedBorder == null && borderColor != null) {
+    resolvedBorder = Border.all(color: borderColor, width: borderWidth);
   }
 
   return BoxDecoration(
-    color: cl,
-    borderRadius: borderRadius,
-    border: border,
+    color: color,
+    borderRadius: shape == BoxShape.circle ? null : resolvedRadius,
+    border: resolvedBorder,
     boxShadow: shadow,
     gradient: gradient,
     shape: shape,
   );
 }
 
-/// Helper to create a subtle drop shadow.
+/// Helper to create a clean drop shadow.
 BoxShadow dropShadow({
   Color color = const Color(0x1A000000),
   double blur = 8.0,

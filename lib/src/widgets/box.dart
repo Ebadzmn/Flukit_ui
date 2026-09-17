@@ -1,55 +1,98 @@
 import 'package:flutter/material.dart';
 
-/// Lightweight, readable alias for Flutter's [SizedBox].
-///
-/// Example:
-/// ```dart
-/// box(w: 100, h: 50, ch: txt('Inside box'))
-/// box.square(50)
-/// box.shrink()
-/// box.expand()
-/// ```
-class box extends StatelessWidget {
-  /// Width
-  final double? w;
+/// A smart, boilerplate-free [Container] wrapper with clean and intuitive properties.
+/// Eliminates the need for writing nested `BoxDecoration` and `EdgeInsets`.
+class Box extends StatelessWidget {
+  final Widget? child;
+  final double? width;
+  final double? height;
+  final Color? color;
+  final double? radius;
+  final BorderRadiusGeometry? borderRadius;
+  final Border? border;
+  final Color? borderColor;
+  final double borderWidth;
+  final List<BoxShadow>? shadow;
+  final dynamic padding;
+  final dynamic margin;
+  final AlignmentGeometry? alignment;
+  final Gradient? gradient;
+  final Clip clipBehavior;
+  final VoidCallback? onTap;
 
-  /// Height
-  final double? h;
-
-  /// Child widget
-  final Widget? ch;
-
-  const box({
+  const Box({
     super.key,
-    this.w,
-    this.h,
-    this.ch,
+    this.child,
+    this.width,
+    this.height,
+    this.color,
+    this.radius,
+    this.borderRadius,
+    this.border,
+    this.borderColor,
+    this.borderWidth = 1.0,
+    this.shadow,
+    this.padding,
+    this.margin,
+    this.alignment,
+    this.gradient,
+    this.clipBehavior = Clip.none,
+    this.onTap,
   });
 
-  /// Creates a square box with equal width and height.
-  const box.square(
-    double dimension, {
-    super.key,
-    this.ch,
-  })  : w = dimension,
-        h = dimension;
-
-  /// Creates a zero-size box.
-  const box.shrink({super.key, this.ch})
-      : w = 0.0,
-        h = 0.0;
-
-  /// Creates a box expanding to maximum constraints.
-  const box.expand({super.key, this.ch})
-      : w = double.infinity,
-        h = double.infinity;
+  /// Resolves flexible dynamic padding/margin (accepts `double`, `int`, or `EdgeInsetsGeometry`).
+  EdgeInsetsGeometry? _resolveInsets(dynamic insets) {
+    if (insets == null) return null;
+    if (insets is EdgeInsetsGeometry) return insets;
+    if (insets is num) return EdgeInsets.all(insets.toDouble());
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: w,
-      height: h,
-      child: ch,
+    BorderRadiusGeometry? resolvedRadius = borderRadius;
+    if (resolvedRadius == null && radius != null) {
+      resolvedRadius = BorderRadius.circular(radius!);
+    }
+
+    Border? resolvedBorder = border;
+    if (resolvedBorder == null && borderColor != null) {
+      resolvedBorder = Border.all(color: borderColor!, width: borderWidth);
+    }
+
+    final hasDecoration = color != null ||
+        resolvedRadius != null ||
+        resolvedBorder != null ||
+        shadow != null ||
+        gradient != null;
+
+    Widget current = Container(
+      width: width,
+      height: height,
+      alignment: alignment,
+      padding: _resolveInsets(padding),
+      margin: _resolveInsets(margin),
+      clipBehavior: clipBehavior,
+      decoration: hasDecoration
+          ? BoxDecoration(
+              color: color,
+              borderRadius: resolvedRadius,
+              border: resolvedBorder,
+              boxShadow: shadow,
+              gradient: gradient,
+            )
+          : null,
+      child: child,
     );
+
+    if (onTap != null) {
+      current = InkWell(
+        onTap: onTap,
+        borderRadius: resolvedRadius is BorderRadius ? resolvedRadius : null,
+        child: current,
+      );
+    }
+
+    return current;
   }
 }

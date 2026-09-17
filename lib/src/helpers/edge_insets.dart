@@ -25,27 +25,20 @@ BorderRadius? resolveRadius(dynamic value) {
 }
 
 /// Shorthand helper function for [BorderRadius.circular].
-///
-/// Example:
-/// ```dart
-/// circular(12)
-/// radCirc(12)
-/// ```
 BorderRadius circular(double radius) => BorderRadius.circular(radius);
-BorderRadius radCirc(double radius) => BorderRadius.circular(radius);
 
 /// Helper function to create [EdgeInsets.symmetric].
-EdgeInsets insetsSym({double h = 0, double v = 0}) =>
-    EdgeInsets.symmetric(horizontal: h, vertical: v);
+EdgeInsets insetsSymmetric({double horizontal = 0, double vertical = 0}) =>
+    EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical);
 
 /// Helper function to create [EdgeInsets.all].
 EdgeInsets insetsAll(double value) => EdgeInsets.all(value);
 
 /// Helper function to create [EdgeInsets.only].
 EdgeInsets insetsOnly({
-  double l = 0,
-  double t = 0,
-  double r = 0,
-  double b = 0,
+  double left = 0,
+  double top = 0,
+  double right = 0,
+  double bottom = 0,
 }) =>
-    EdgeInsets.only(left: l, top: t, right: r, bottom: b);
+    EdgeInsets.only(left: left, top: top, right: right, bottom: bottom);

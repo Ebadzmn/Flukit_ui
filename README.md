@@ -1,128 +1,48 @@
-# flukit_ui
+<div align="center">
+  <h1>⚡ flukit_ui</h1>
+  <p><strong>A fluent, lightweight productivity toolkit for Flutter developers.</strong></p>
+  <p>Write standard Flutter widgets with expressive method chaining. Zero boilerplate, zero learning curve.</p>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Ebadzmn/Flukit_ui/main/assets/banner.png" alt="FluKit UI Banner" width="100%" />
-</p>
-
-<p align="center">
-  <a href="https://pub.dev/packages/flukit_ui"><img src="https://img.shields.io/badge/pub-v1.0.0-blue.svg" alt="pub package" /></a>
-  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
-  <img src="https://img.shields.io/badge/tests-passing-brightgreen.svg" alt="Flutter Tests" />
-</p>
-
-> **Flutter, but with less boilerplate.**  
-> A lightweight, productivity-focused Flutter package providing short, readable, and consistent aliases for commonly used widgets, properties, and UI utilities.
+  <p>
+    <a href="https://pub.dev/packages/flukit_ui"><img src="https://img.shields.io/pub/v/flukit_ui.svg" alt="Pub Version"></a>
+    <a href="https://github.com/Ebadzmn/Flukit_ui"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
+  </p>
+</div>
 
 ---
 
-## ⚡ Why flukit_ui?
-
-Flutter’s declarative widget tree is expressive, but building modern UI often results in deep nesting and excessive boilerplate for basic attributes:
-
-- Multiple nested objects (`Container`, `BoxDecoration`, `BorderRadius`, `Border.all`, `BoxShadow`) just to style a card.
-- Verbose and repetitive `EdgeInsets.all(...)` and `EdgeInsets.symmetric(...)`.
-- Lengthy `ElevatedButton.styleFrom(backgroundColor: ..., shape: RoundedRectangleBorder(...))`.
-- Cumbersome `MainAxisAlignment.spaceBetween` and `CrossAxisAlignment.center` declarations.
-- Deprecated/verbose color opacity methods (`color.withValues(alpha: 0.2)`).
-
-`flukit_ui` solves this by introducing **concise, predictable aliases** and **fluent chaining**, while preserving 100% of standard Flutter behavior and performance.
-
----
-
-## ⚖️ Before vs After
-
-### 1. Card & Container
-#### Standard Flutter:
-```dart
-Container(
-  width: 200,
-  height: 100,
-  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-  margin: const EdgeInsets.all(8),
-  decoration: BoxDecoration(
-    color: Colors.white,
-    borderRadius: BorderRadius.circular(12),
-    border: Border.all(color: Colors.grey.shade300, width: 1),
-  ),
-  child: Text(
-    'Hello World',
-    style: const TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.bold,
-      color: Colors.black,
-    ),
-  ),
-)
-```
-
-#### With flukit_ui:
-```dart
-cont(
-  w: 200,
-  h: 100,
-  px: 16,
-  py: 12,
-  mar: 8,
-  rad: 12,
-  cl: white,
-  bor: 1,
-  bc: grey300,
-  ch: txt('Hello World', fs: 20, fw: bold, cl: black),
-)
-```
+## 📑 Table of Contents
+- [🌟 Why FluKit UI?](#-why-flukit-ui)
+- [📦 Installation](#-installation)
+- [📱 Real-Life UI Components Examples](#-real-life-ui-components-examples)
+  - [1. Modern Login & Auth Form](#1-modern-login--auth-form)
+  - [2. E-Commerce Product Card](#2-e-commerce-product-card)
+  - [3. User Profile Header with Badges](#3-user-profile-header-with-badges)
+  - [4. Transaction / Activity History Tile](#4-transaction--activity-history-tile)
+- [🚀 Comprehensive API Reference & Usage](#-comprehensive-api-reference--usage)
+  - [1. 📝 Text & Typography Extensions](#1--text--typography-extensions)
+  - [2. 📐 Widget Layout & Styling Extensions](#2--widget-layout--styling-extensions)
+  - [3. 📱 BuildContext (Navigation, Dimensions & SnackBar)](#3--buildcontext-navigation-dimensions--snackbar)
+  - [4. 🔢 Spacing, Radius & Duration Extensions](#4--spacing-radius--duration-extensions)
+  - [5. 📜 List Extensions & Easy Columns/Rows](#5--list-extensions--easy-columnsrows)
+  - [6. 🔤 String Extensions & Utilities](#6--string-extensions--utilities)
+  - [7. 📦 Smart Box Widget (Boilerplate-free Container)](#7--smart-box-widget-boilerplate-free-container)
+  - [8. 🎨 Color & Helper Functions](#8--color--helper-functions)
+- [⚡ Complete Before vs After Comparison](#-complete-before-vs-after-comparison)
+- [🤝 Contributing & License](#-contributing--license)
 
 ---
 
-### 2. Buttons
-#### Standard Flutter:
-```dart
-ElevatedButton.icon(
-  style: ElevatedButton.styleFrom(
-    backgroundColor: const Color(0xFF4F46E5),
-    foregroundColor: Colors.white,
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-  ),
-  onPressed: () => print('Created'),
-  icon: const Icon(Icons.add, size: 18, color: Colors.white),
-  label: const Text('Create Task', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white)),
-)
-```
+## 🌟 Why FluKit UI?
 
-#### With flukit_ui:
-```dart
-btn.icon(
-  icon: Icons.add,
-  label: 'Create Task',
-  onTap: () => print('Created'),
-  bg: hex('#4F46E5'),
-  fg: white,
-  rad: 10,
-  px: 20,
-  py: 12,
-)
-```
+Writing standard Flutter UI usually requires heavy boilerplate like deeply nested `TextStyle(...)`, `BoxDecoration(...)`, `EdgeInsets.all(...)`, `MediaQuery.of(context)` and `Navigator.push(...)`.
 
----
+**FluKit UI doesn't force you to memorize strange 3-letter shorthand widget names.** Instead, you use standard Flutter widgets and properties with fluent chained methods:
 
-### 3. Linear Progress Indicator
-#### Standard Flutter:
-```dart
-ClipRRect(
-  borderRadius: BorderRadius.circular(8),
-  child: LinearProgressIndicator(
-    value: 0.65,
-    minHeight: 8,
-    backgroundColor: Colors.white.withValues(alpha: 0.25),
-    valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
-  ),
-)
-```
-
-#### With flukit_ui:
-```dart
-lprog(0.65, h: 8, bg: white.op(0.25), cl: white, rad: 8)
-```
+- ✅ **Zero Learning Curve:** Keep writing standard Flutter `Text`, `Container`, `Row`, `Column`.
+- ✅ **Auto-complete Friendly:** Type a dot (`.`) in VS Code or Android Studio to instantly see all available styling options.
+- ✅ **Up to 60% Less Code:** Dramatically reduces nesting brackets and boilerplate.
+- ✅ **Fast & Lightweight:** Pure Dart extension wrappers with zero performance overhead.
 
 ---
 
@@ -132,138 +52,664 @@ Add `flukit_ui` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flukit_ui: ^1.0.0
+  flukit_ui: ^1.0.1
 ```
 
-Import the package in your Dart code:
+Or run:
+```bash
+flutter pub add flukit_ui
+```
 
+Then import it wherever needed:
 ```dart
 import 'package:flukit_ui/flukit_ui.dart';
 ```
 
 ---
 
-## 🚀 Complete API Reference & Cheatsheet
+## 📱 Real-Life UI Components Examples
 
-### 1. Widget Aliases Comparison Table
+Here are real-life Flutter components built cleanly using `flukit_ui`:
 
-| Category / Target | Standard Flutter (Before) | flukit_ui (Now) | Live Example / Usage |
-|---|---|---|---|
-| **Container & Decoration** | `Container(decoration: BoxDecoration(...))` | `cont` | `cont(w: 120, h: 50, pad: 16, rad: 12, cl: white, bor: 1, bc: grey200, ch: ...)` |
-| **Container with Tap** | `InkWell(borderRadius: ..., child: Container(...))` | `cont(onTap: ...)` | `cont(pad: 12, rad: 8, cl: blue, onTap: () => print('tapped'), ch: txt('Tap'))` |
-| **Text & Styling** | `Text('...', style: TextStyle(...))` | `txt` | `txt('Welcome', fs: 18, fw: bold, cl: black, ta: TextAlign.center)` |
-| **Elevated Button** | `ElevatedButton(style: ElevatedButton.styleFrom(...))` | `btn` | `btn('Submit', onTap: () {}, bg: blue, fg: white, rad: 10, px: 20, py: 12)` |
-| **Button with Icon** | `ElevatedButton.icon(style: ..., icon: ..., label: ...)` | `btn.icon` | `btn.icon(icon: Icons.add, label: 'Add Task', onTap: () {}, bg: blue, rad: 10)` |
-| **Outlined Button** | `OutlinedButton(style: OutlinedButton.styleFrom(...))` | `btn.outline` | `btn.outline('Cancel', onTap: () {}, bc: grey300, fg: black, rad: 8)` |
-| **Text Button** | `TextButton(child: Text('...'))` | `btn.text` | `btn.text('Forgot Password?', onTap: () {}, fg: blue)` |
-| **Progress Indicator** | `ClipRRect(child: LinearProgressIndicator(...))` | `lprog` | `lprog(0.75, h: 8, bg: white.op(0.2), cl: white, rad: 8)` |
-| **Column** | `Column(mainAxisAlignment: ..., children: [...])` | `col` | `col(ch: [txt('Item 1'), txt('Item 2')], cross: caa.start, main: maa.between)` |
-| **Row** | `Row(crossAxisAlignment: ..., children: [...])` | `row` | `row(ch: [ico(Icons.star), hgap(8), txt('Rating')], main: maa.center)` |
-| **Stack** | `Stack(alignment: ..., children: [...])` | `stk` | `stk(ch: [cont(...), txt('Overlaid')])` |
-| **Center** | `Center(child: ...)` | `ctr` | `ctr(ch: txt('Centered text'))` |
-| **Padding** | `Padding(padding: EdgeInsets.all(16), child: ...)` | `pad` | `pad(16, ch: txt('Padded'))` or `pad.sym(h: 16, v: 8, ch: ...)` |
-| **Expanded** | `Expanded(flex: 1, child: ...)` | `exp` | `exp(ch: txt('Fills remaining space'))` |
-| **Flexible** | `Flexible(flex: 1, child: ...)` | `flx` | `flx(ch: cont(...))` |
-| **SizedBox** | `SizedBox(width: 100, height: 50, child: ...)` | `box` | `box(w: 100, h: 50, ch: ...)` or `box.shrink()` |
-| **Scaffold** | `Scaffold(appBar: ..., body: ..., floatingActionButton: ...)` | `scaf` | `scaf(appBar: AppBar(...), body: ..., fab: FloatingActionButton(...), bg: grey100)` |
-| **Icon** | `Icon(Icons.add, size: 20, color: Colors.white)` | `ico` | `ico(Icons.add, sz: 20, cl: white)` |
-| **Image** | `Image.network(...)` / `Image.asset(...)` | `img` | `img.net('https://...', w: 80, h: 80, rad: 12)` |
-| **SafeArea** | `SafeArea(child: ...)` | `safe` | `safe(ch: txt('Safe Content'))` |
-| **Align** | `Align(alignment: Alignment.centerRight, child: ...)` | `ali` | `ali(ali: Alignment.centerRight, ch: ...)` |
-
----
-
-### 2. Alignment Shortcuts Table
-
-| Alignment Target | Standard Flutter (Before) | flukit_ui (Now) | Live Example / Usage |
-|---|---|---|---|
-| **Space Between** | `MainAxisAlignment.spaceBetween` | `maa.between` or `spaceBetween` | `row(main: maa.between, ch: [...])` |
-| **Center (Main)** | `MainAxisAlignment.center` | `maa.center` | `row(main: maa.center, ch: [...])` |
-| **Start / End (Main)**| `MainAxisAlignment.start` / `.end` | `maa.start` / `maa.end` | `col(main: maa.start, ch: [...])` |
-| **Space Around** | `MainAxisAlignment.spaceAround` | `maa.around` or `spaceAround` | `row(main: maa.around, ch: [...])` |
-| **Space Evenly** | `MainAxisAlignment.spaceEvenly` | `maa.evenly` or `spaceEvenly` | `row(main: maa.evenly, ch: [...])` |
-| **Stretch (Cross)**| `CrossAxisAlignment.stretch` | `caa.stretch` or `stretch` | `col(cross: caa.stretch, ch: [...])` |
-| **Start / Center (Cross)**| `CrossAxisAlignment.start` / `.center` | `caa.start` / `caa.center` | `col(cross: caa.start, ch: [...])` |
-
----
-
-### 3. Spacing & Gap Utilities Table
-
-| Requirement | Standard Flutter (Before) | flukit_ui (Now) | Live Example / Usage |
-|---|---|---|---|
-| **Vertical Space** | `SizedBox(height: 16)` | `vgap(16)` or `16.vgap` | `col(ch: [txt('Title'), vgap(16), txt('Body')])` |
-| **Horizontal Space**| `SizedBox(width: 12)` | `hgap(12)` or `12.hgap` | `row(ch: [ico(Icons.add), 12.hgap, txt('Add')])` |
-| **Square Gap** | `SizedBox(width: 16, height: 16)` | `gap(16)` or `16.gap` | `gap(16)` |
-
----
-
-### 4. Color, Opacity & Radius Helpers Table
-
-| Feature | Standard Flutter (Before) | flukit_ui (Now) | Live Example / Usage |
-|---|---|---|---|
-| **Hex Color Parsing** | `Color(int.parse('0xFF4F46E5'))` | `hex('#4F46E5')` | `cl: hex('#4F46E5')` |
-| **Color with Opacity**| `color.withValues(alpha: 0.25)` | `color.op(0.25)` | `white.op(0.25)` or `black.op(0.5)` |
-| **Circular Radius** | `BorderRadius.circular(12)` | `circular(12)` or `12.rad` | `rad: 12.rad` or `circular(12)` |
-| **Symmetric Insets** | `EdgeInsets.symmetric(horizontal: 16, vertical: 8)` | `16.px` / `8.py` | `pad: [16.px, 8.py]` or `cont(px: 16, py: 8)` |
-| **Drop Shadow** | `BoxShadow(color: ..., blurRadius: 10, offset: Offset(0, 4))` | `dropShadow(...)` | `shadow: [dropShadow(color: black.op(0.05), blur: 10)]` |
-
----
-
-### 5. Fluent Modifiers & Extensions Table
-
-| Extension | Standard Flutter (Before) | flukit_ui (Now) | Live Example / Usage |
-|---|---|---|---|
-| **Clickable / Ripple**| `InkWell(borderRadius: ..., onTap: ..., child: ...)` | `.onTap(..., rad: ...)` | `myWidget.onTap(() => print('tapped'), rad: 12)` |
-| **All Padding** | `Padding(padding: EdgeInsets.all(16), child: ...)` | `.pad(16)` | `myWidget.pad(16)` |
-| **Horizontal Padding**| `Padding(padding: EdgeInsets.symmetric(horizontal: 12), child: ...)` | `.px(12)` | `myWidget.px(12)` |
-| **Vertical Padding** | `Padding(padding: EdgeInsets.symmetric(vertical: 8), child: ...)` | `.py(8)` | `myWidget.py(8)` |
-| **Clip Corner Radius**| `ClipRRect(borderRadius: BorderRadius.circular(12), child: ...)` | `.clipR(12)` | `myWidget.clipR(12)` |
-| **Center Widget** | `Center(child: ...)` | `.center()` | `myWidget.center()` |
-| **Expand Widget** | `Expanded(child: ...)` | `.expanded()` | `myWidget.expanded()` |
-| **Opacity** | `Opacity(opacity: 0.8, child: ...)` | `.opacity(0.8)` | `myWidget.opacity(0.8)` |
-
-#### On `txt`:
+### 1. Modern Login & Auth Form
 ```dart
-txt('Build Faster')
-    .fs(22)
-    .bold()
-    .cl(white)
-    .ta(TextAlign.center);
+class LoginForm extends StatelessWidget {
+  const LoginForm({super.key});
 
-// Available weight helpers:
-.bold(), .semiBold(), .medium(), .light()
-```
-
-#### On `num`:
-```dart
-16.vgap     // SizedBox(height: 16)
-8.hgap      // SizedBox(width: 8)
-12.rad      // BorderRadius.circular(12)
-16.pad      // EdgeInsets.all(16)
-12.px       // EdgeInsets.symmetric(horizontal: 12)
-8.py        // EdgeInsets.symmetric(vertical: 8)
+  @override
+  Widget build(BuildContext context) {
+    return Box(
+      padding: 24,
+      radius: 20,
+      color: Colors.white,
+      shadow: [dropShadow(color: Colors.black.op(0.06), blur: 20, offset: const Offset(0, 10))],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Title & Subtitle
+          const Text('Welcome Back!').size(24).bold().color(const Color(0xFF0F172A)),
+          6.height,
+          const Text('Enter your credentials to continue').size(14).color(Colors.grey),
+          
+          24.height,
+          
+          // Input Fields
+          TextField(
+            decoration: InputDecoration(
+              hintText: 'Email Address',
+              prefixIcon: const Icon(Icons.email_outlined),
+              border: OutlineInputBorder(borderRadius: 12.radius),
+            ),
+          ),
+          16.height,
+          TextField(
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: 'Password',
+              prefixIcon: const Icon(Icons.lock_outline),
+              border: OutlineInputBorder(borderRadius: 12.radius),
+            ),
+          ),
+          
+          12.height,
+          
+          // Forgot Password Link
+          const Text('Forgot Password?')
+              .size(13)
+              .semiBold()
+              .color(const Color(0xFF4F46E5))
+              .alignRight()
+              .onTap(() => context.showSnackBar('Reset link sent!')),
+          
+          24.height,
+          
+          // Submit Button
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF4F46E5),
+              foregroundColor: Colors.white,
+              padding: 16.padY,
+              shape: RoundedRectangleBorder(borderRadius: 12.radius),
+            ),
+            onPressed: () {
+              context.hideKeyboard();
+              context.showSnackBar('Logging in...');
+            },
+            child: const Text('Sign In').size(16).bold(),
+          ),
+        ],
+      ),
+    );
+  }
+}
 ```
 
 ---
 
-## 🏛️ Design Philosophy
+### 2. E-Commerce Product Card
+```dart
+class ProductCard extends StatelessWidget {
+  final String title;
+  final String price;
+  final String imageUrl;
+  final double rating;
 
-1. **100% Flutter Native**: Under the hood, every alias is directly mapped to canonical Flutter widgets. Zero performance overhead.
-2. **Intuitive & Predictable**: Abbreviations follow standard developer conventions (`pad` = padding, `rad` = borderRadius, `cl` = color, `fs` = fontSize, `bg` = backgroundColor).
-3. **Full Interoperability**: Mix and match freely with existing Flutter code and third-party libraries.
+  const ProductCard({
+    super.key,
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+    required this.rating,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Box(
+      width: 200,
+      padding: 12,
+      radius: 16,
+      color: Colors.white,
+      borderColor: const Color(0xFFF1F5F9),
+      shadow: [dropShadow(color: Colors.black.op(0.04), blur: 12)],
+      onTap: () => print('Product clicked'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Product Image with Favorite Button overlay
+          Stack(
+            children: [
+              Image.network(imageUrl, height: 140, width: double.infinity, fit: BoxFit.cover)
+                  .rounded(12),
+              Positioned(
+                top: 8,
+                right: 8,
+                child: Box(
+                  padding: 6,
+                  color: Colors.white.op(0.9),
+                  radius: 20,
+                  onTap: () => context.showSnackBar('Added to favorites!'),
+                  child: const Icon(Icons.favorite_border, size: 16, color: Colors.red),
+                ),
+              ),
+            ],
+          ),
+          
+          10.height,
+          
+          // Product Title
+          Text(title)
+              .size(15)
+              .semiBold()
+              .color(const Color(0xFF1E293B))
+              .maxLine(1, overflow: TextOverflow.ellipsis),
+          
+          4.height,
+          
+          // Rating & Reviews
+          Row(
+            children: [
+              const Icon(Icons.star, size: 14, color: Colors.amber),
+              4.width,
+              Text('$rating').size(12).semiBold(),
+              4.width,
+              const Text('(120 reviews)').size(11).color(Colors.grey),
+            ],
+          ),
+          
+          12.height,
+          
+          // Price and Add to Cart Button
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(price).size(18).bold().color(const Color(0xFF4F46E5)),
+              Box(
+                padding: 8,
+                radius: 8,
+                color: const Color(0xFF4F46E5),
+                onTap: () => context.showSnackBar('$title added to cart!'),
+                child: const Icon(Icons.add_shopping_cart, size: 16, color: Colors.white),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
 
 ---
 
-## 🤝 Contributing
+### 3. User Profile Header with Badges
+```dart
+class ProfileHeader extends StatelessWidget {
+  const ProfileHeader({super.key});
 
-Contributions, feedback, and pull requests are welcome!
-1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/amazing-feature`).
-3. Ensure all tests pass (`flutter test`) and `flutter analyze` has zero issues.
-4. Open a Pull Request.
+  @override
+  Widget build(BuildContext context) {
+    return Box(
+      padding: 20,
+      radius: 16,
+      gradient: const LinearGradient(
+        colors: [Color(0xFF4F46E5), Color(0xFF7C3AED)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      child: Row(
+        children: [
+          // Avatar with border
+          Box(
+            padding: 3,
+            radius: 35,
+            color: Colors.white,
+            child: Image.network('https://i.pravatar.cc/150?img=11')
+                .square(64)
+                .circle(),
+          ),
+          
+          16.width,
+          
+          // User Details
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Text('Sophia Williams')
+                      .size(18)
+                      .bold()
+                      .color(Colors.white),
+                  6.width,
+                  const Icon(Icons.verified, size: 18, color: Colors.amber),
+                ],
+              ),
+              4.height,
+              const Text('Senior UI/UX Engineer')
+                  .size(13)
+                  .color(Colors.white.op(0.85)),
+              8.height,
+              
+              // Status Badge
+              Box(
+                padding: insetsSymmetric(horizontal: 10, vertical: 4),
+                radius: 20,
+                color: Colors.white.op(0.2),
+                child: const Text('PRO MEMBER')
+                    .size(10)
+                    .bold()
+                    .color(Colors.white)
+                    .letterSpacing(0.8),
+              ),
+            ],
+          ).expanded(),
+        ],
+      ),
+    );
+  }
+}
+```
 
 ---
 
-## 📄 License
+### 4. Transaction / Activity History Tile
+```dart
+class TransactionTile extends StatelessWidget {
+  final String title;
+  final String date;
+  final String amount;
+  final bool isIncome;
 
+  const TransactionTile({
+    super.key,
+    required this.title,
+    required this.date,
+    required this.amount,
+    required this.isIncome,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Box(
+      padding: 14,
+      radius: 12,
+      color: Colors.white,
+      borderColor: const Color(0xFFF1F5F9),
+      onTap: () => print('Transaction details: $title'),
+      child: Row(
+        children: [
+          // Category Icon Box
+          Box(
+            padding: 10,
+            radius: 10,
+            color: (isIncome ? Colors.green : Colors.red).op(0.1),
+            child: Icon(
+              isIncome ? Icons.arrow_downward : Icons.arrow_upward,
+              color: isIncome ? Colors.green : Colors.red,
+              size: 20,
+            ),
+          ),
+          
+          12.width,
+          
+          // Title & Timestamp
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title).size(15).semiBold().color(const Color(0xFF0F172A)),
+              2.height,
+              Text(date).size(12).color(Colors.grey),
+            ],
+          ).expanded(),
+          
+          // Amount
+          Text('${isIncome ? "+" : "-"}$amount')
+              .size(15)
+              .bold()
+              .color(isIncome ? Colors.green : const Color(0xFF0F172A)),
+        ],
+      ),
+    );
+  }
+}
+```
+
+---
+
+## 🚀 Comprehensive API Reference & Usage
+
+### 1. 📝 Text & Typography Extensions
+Never write `style: TextStyle(...)` again for common styling. Simply chain methods directly on `Text`:
+
+```dart
+// Basic typography
+Text('Welcome Back')
+  .size(24)
+  .bold()
+  .color(Colors.blue)
+  .alignCenter()
+
+// Font weights
+Text('Heading').semiBold()
+Text('Subheading').medium()
+Text('Body text').normal()
+Text('Caption').light()
+
+// Formatting & decorations
+Text('Important notice')
+  .italic()
+  .underline(color: Colors.red, thickness: 2)
+  .letterSpacing(1.2)
+  .lineHeight(1.5)
+  .fontFamily('Poppins')
+
+// Shadows & ellipsis limits
+Text('Long description text here...')
+  .maxLine(2, overflow: TextOverflow.ellipsis)
+  .shadow(color: Colors.black26, blurRadius: 4, offset: const Offset(0, 2))
+```
+
+---
+
+### 2. 📐 Widget Layout & Styling Extensions
+Apply padding, alignment, sizing, border radius, gestures, or conditional visibility to **any Flutter widget**:
+
+```dart
+// 1. Padding
+MyWidget().paddingAll(16)
+MyWidget().paddingSymmetric(horizontal: 20, vertical: 10)
+MyWidget().paddingOnly(top: 12, left: 8)
+
+// 2. Alignment & Center
+MyWidget().center()
+MyWidget().alignTopRight()
+MyWidget().alignBottomLeft()
+MyWidget().align(Alignment.centerRight)
+
+// 3. Expanded & Flexible
+MyWidget().expanded(2) // flex: 2
+MyWidget().flexible()
+
+// 4. Sizing constraints
+MyWidget().width(120)
+MyWidget().height(60)
+MyWidget().square(80) // 80x80 size
+
+// 5. Rounded corners & Shapes
+MyWidget().rounded(16) // ClipRRect with radius 16
+MyWidget().circle()    // ClipOval
+
+// 6. Clicks & Gestures (Instant ripple effect)
+MyWidget().onTap(() {
+  print('Widget Clicked!');
+}, radius: 12)
+
+// 7. Conditional Visibility
+MyWidget().visible(isLoggedIn, replacement: Text('Please log in'))
+
+// 8. Scrolling & SafeArea
+MyWidget().scrollable() // Wraps in SingleChildScrollView
+MyWidget().safeArea()
+```
+
+---
+
+### 3. 📱 BuildContext (Navigation, Dimensions & SnackBar)
+Access screen size, theme data, navigation, and overlays directly from `context` in a single line:
+
+```dart
+// Navigation
+context.push(const ProfileScreen());
+context.pushReplacement(const DashboardScreen());
+context.pushAndRemoveUntil(const LoginScreen());
+context.pop();
+
+// Screen Dimensions & Orientation
+double screenWidth = context.width;
+double screenHeight = context.height;
+bool isLandscape = context.isLandscape;
+double statusBarHeight = context.topPadding;
+
+// Theme & ColorScheme
+ThemeData currentTheme = context.theme;
+Color primaryColor = context.primaryColor;
+bool isDark = context.isDarkMode;
+
+// SnackBar & Overlays
+context.showSnackBar('Profile saved successfully!');
+context.showSnackBar(
+  'Error occurred',
+  backgroundColor: Colors.red,
+  duration: 4.seconds,
+);
+
+// Dismiss keyboard
+context.hideKeyboard();
+```
+
+---
+
+### 4. 🔢 Spacing, Radius & Duration Extensions
+Use clean number extensions for spacing, insets, and time durations:
+
+```dart
+// Vertical and Horizontal Spacing in Column/Row
+Column(
+  children: [
+    Text('Title').bold(),
+    8.height, // SizedBox(height: 8) - or 8.h
+    Text('Subtitle'),
+    16.height,
+    Row(
+      children: [
+        Icon(Icons.star),
+        6.width, // SizedBox(width: 6) - or 6.w
+        Text('4.9'),
+      ],
+    ),
+  ],
+)
+
+// Square gap
+20.gap // SizedBox(width: 20, height: 20)
+
+// Quick Insets & Radius
+final padding = 16.padAll; // EdgeInsets.all(16)
+final horizontalPadding = 12.padX; // EdgeInsets.symmetric(horizontal: 12)
+final borderRadius = 12.radius; // BorderRadius.circular(12)
+
+// Expressive Durations
+300.ms       // Duration(milliseconds: 300)
+2.seconds    // Duration(seconds: 2)
+5.minutes    // Duration(minutes: 5)
+```
+
+---
+
+### 5. 📜 List Extensions & Easy Columns/Rows
+Never repeat `SizedBox(height: ...)` between list items again:
+
+```dart
+// Automatically add gap between all children
+Column(
+  children: [
+    WidgetA(),
+    WidgetB(),
+    WidgetC(),
+  ].gap(12), // Inserts 12px gap between every widget automatically!
+)
+
+// Convert a List directly to a Column or Row with gaps
+[
+  Text('Item 1'),
+  Text('Item 2'),
+  Text('Item 3'),
+].toColumn(gap: 16, crossAxisAlignment: CrossAxisAlignment.start)
+
+[
+  Icon(Icons.home),
+  Text('Home'),
+].toRow(gap: 8)
+
+// Add custom separator
+[WidgetA(), WidgetB()].separatedBy(const Divider())
+```
+
+---
+
+### 6. 🔤 String Extensions & Utilities
+Convert strings directly into Text widgets or format strings cleanly:
+
+```dart
+// Direct Text creation & chaining
+'Hello World'.text().size(18).bold().color(Colors.purple)
+
+// Formatting helpers
+'john doe'.capitalizeFirst   // 'John doe'
+'flutter developer'.titleCase // 'Flutter Developer'
+
+// Validations
+'test@domain.com'.isValidEmail // true
+'12345'.isNumeric              // true
+```
+
+---
+
+### 7. 📦 Smart Box Widget (Boilerplate-free Container)
+The `Box` widget replaces verbose `Container(decoration: BoxDecoration(...))` with clean, direct properties:
+
+```dart
+Box(
+  width: double.infinity,
+  padding: 16, // Accepts double, int, or EdgeInsets
+  margin: 12,
+  radius: 16,  // Clean border radius
+  color: Colors.white,
+  borderColor: Colors.grey.shade200,
+  borderWidth: 1.5,
+  shadow: [
+    dropShadow(color: Colors.black12, blur: 10, offset: const Offset(0, 4)),
+  ],
+  onTap: () => print('Box tapped!'),
+  child: Column(
+    children: [
+      Text('Inside Smart Box').bold(),
+      8.height,
+      Text('No BoxDecoration boilerplate needed!'),
+    ],
+  ),
+)
+```
+
+---
+
+### 8. 🎨 Color & Helper Functions
+```dart
+// Hex color parsing
+Color brandColor = hex('#4F46E5');
+Color transparentBrand = hex('#4F46E5', alpha: 0.5);
+
+// Color adjustments
+Colors.blue.op(0.4)       // Smooth opacity
+Colors.blue.darken(0.15)  // Darken by 15%
+Colors.blue.lighten(0.15) // Lighten by 15%
+
+// Drop shadow helper
+BoxShadow shadow = dropShadow(
+  color: Colors.black.op(0.08),
+  blur: 12,
+  offset: const Offset(0, 6),
+);
+```
+
+---
+
+## ⚡ Complete Before vs After Comparison
+
+### Example: Building a Profile Card
+
+#### ❌ Standard Flutter (Verbose & Nested):
+```dart
+Material(
+  color: Colors.transparent,
+  child: InkWell(
+    borderRadius: BorderRadius.circular(16),
+    onTap: () => Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => const ProfilePage()),
+    ),
+    child: Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x14000000),
+            blurRadius: 10,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          ClipOval(
+            child: Image.asset('assets/avatar.png', width: 48, height: 48),
+          ),
+          const SizedBox(width: 12),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              Text(
+                'Alex Turner',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+              ),
+              SizedBox(height: 4),
+              Text(
+                'Product Designer',
+                style: TextStyle(fontSize: 13, color: Colors.grey),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  ),
+)
+```
+
+#### ✅ With `flukit_ui` (Clean, Readable & Fluent):
+```dart
+Box(
+  padding: 16,
+  radius: 16,
+  color: Colors.white,
+  borderColor: hex('#E2E8F0'),
+  shadow: [dropShadow()],
+  onTap: () => context.push(const ProfilePage()),
+  child: Row(
+    children: [
+      Image.asset('assets/avatar.png').square(48).circle(),
+      12.width,
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Alex Turner').size(16).bold().color(Colors.black),
+          4.height,
+          const Text('Product Designer').size(13).color(Colors.grey),
+        ],
+      ),
+    ],
+  ),
+)
+```
+
+---
+
+## 🤝 Contributing & License
+
+Contributions, issues, and feature requests are welcome!
+Feel free to open an issue or pull request on the [GitHub repository](https://github.com/Ebadzmn/Flukit_ui).
+
+### License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
